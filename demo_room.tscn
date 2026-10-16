@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cc4kyvhc8f8uk"]
+
+[ext_resource type="PackedScene" uid="uid://x1blq4pdmsc8" path="res://plane.tscn" id="1_6oouq"]
+
+[node name="Demo Room" type="Node3D" unique_id=2013839125]
+
+[node name="Plane" parent="." unique_id=1771454766 instance=ExtResource("1_6oouq")]

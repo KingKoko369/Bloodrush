@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://5h4o752t1njh"]
+
+[ext_resource type="PackedScene" uid="uid://dpx4vr4aj5ou7" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cc4kyvhc8f8uk" path="res://demo_room.tscn" id="2_0xm2m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_top_color = Color(0.30335847, 0.55109006, 0.9108826, 1)
+sky_horizon_color = Color(0.5127954, 0.57472825, 0.6646764, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.5127954, 0.57472825, 0.6646764, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+glow_enabled = true
+
+[node name="Main" type="Node3D" unique_id=1789448109]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=929552284]
+environment = SubResource("Environment_h2yge")
+
+[node name="Player" parent="." unique_id=921330805 instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Demo Room" parent="." unique_id=2013839125 instance=ExtResource("2_0xm2m")]
