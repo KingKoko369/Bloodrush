@@ -20,8 +20,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
+	move_and_slide()
 func _unhandled_input(event: InputEvent) -> void:
 	if not($Camera.paused) and event is InputEventMouseMotion:
 		rotation.y -= event.relative.x * $Camera.mouse_sens * 0.001
-
-	move_and_slide()
