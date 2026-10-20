@@ -5,3 +5,4 @@
 [node name="Demo Room" type="Node3D" unique_id=2013839125]
 
 [node name="Plane" parent="." unique_id=1771454766 instance=ExtResource("1_6oouq")]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
