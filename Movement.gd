@@ -6,34 +6,43 @@ extends CharacterBody3D
 @export var slide_friction: float = 1
 @export var steer_speed: float = 5
 var speed = start_speed
-var sprint = false
-var slide = false
-var crouch = false
+var sprint:bool = false
+var slide:bool = false
+var crouch:bool = false
+var jumps:int = 0
 
 func _physics_process(delta: float) -> void:
 	var horizontal_velocity := Vector3(velocity.x, 0, velocity.z)
 	var current_speed := horizontal_velocity.length()
 	var current_dir := horizontal_velocity.normalized()
-	if not is_on_floor():
+	speed = start_speed
+	if is_on_floor():
+		jumps = 2
+	else:
 		velocity += get_gravity() * delta
-	if Input.is_action_just_pressed("move_jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		speed /= 2
+	if Input.is_action_just_pressed("move_jump") and jumps:
+		if slide and is_on_floor():
+			velocity.y = JUMP_VELOCITY*1.5
+		else:
+			velocity.y = JUMP_VELOCITY
+		jumps -= 1
 	if Input.is_action_pressed("move_sprint") and Input.is_action_pressed("move_forward"):
 		sprint = true
-		speed = start_speed * 2
+		speed *= 2
 	else:
 		sprint = false
-		speed = start_speed
 	if Input.is_action_pressed("move_crouch"):
-		velocity.y = 0 - JUMP_VELOCITY
+		if Input.is_action_just_pressed("move_crouch"):
+			velocity.y = -5 * JUMP_VELOCITY
 		scale.x = 0.5
 		scale.y = 0.5
 		scale.z = 0.5
-		if current_speed > 1:
+		if current_speed > start_speed/1.5:
 			slide = true
 		else:
 			crouch = true
-			speed = start_speed / 2
+			speed /= 2
 	else:
 		crouch = false
 		slide = false
@@ -48,17 +57,21 @@ func _physics_process(delta: float) -> void:
 	else:
 		if slide:
 			current_speed = move_toward(current_speed, 0, slide_friction * delta)
+			if current_speed < start_speed / 1.5:
+				slide = false
+				crouch = true
+			if not is_on_floor():
+				slide = false
+				crouch = true
+				current_speed * 5
 			if direction: 
-				var target_dir := direction.normalized()
+				var target_dir := direction
 				var new_dir := current_dir.lerp(target_dir, steer_speed * delta).normalized()
 				velocity.x = new_dir.x * current_speed
 				velocity.z = new_dir.z * current_speed
 			else:
 				velocity.x = current_dir.x * current_speed
 				velocity.z = current_dir.z * current_speed
-			if current_speed < 0.5:
-				slide = false
-				crouch = true
 
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed / 2)

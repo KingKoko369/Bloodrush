@@ -5,7 +5,7 @@ extends Camera3D
 
 func _ready() -> void:
 	paused = true
-func _process(delta):
+func _process(_delta):
 	if paused:
 		if Input.is_action_just_pressed("unpause"):
 			paused = false
