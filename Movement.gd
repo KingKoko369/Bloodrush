@@ -21,13 +21,22 @@ func _physics_process(delta: float) -> void:
 		sprint = false
 		speed = start_speed
 	if Input.is_action_pressed("move_crouch"):
+		position.y -= scale.y - 1
+		scale.x = 0.5
+		scale.y = 0.5
+		scale.z = 0.5
 		if sprint:
 			slide = true
+			speed = velocity.x
 		else:
 			crouch = true
-			scale.y = 0.5
+			speed = start_speed / 2
 	else:
+		crouch = false
 		slide = false
+		scale.x = 1
+		scale.y = 1
+		scale.z = 1
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
