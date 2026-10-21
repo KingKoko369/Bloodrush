@@ -1,23 +1,23 @@
 extends CharacterBody3D
 
-@export var base_speed:= 5.0
-@export var jump_velocity:= 5.0
+@export var base_speed:= 5
+@export var jump_velocity:= 5
 @export var base_friction:= 75
 @export var steer_speed:= 1
+@export var max_jumps:=2
 var friction: float = base_friction
 var speed: float = base_speed
 var current_state:= "idle"
 var jumps:= 0
 
 func _physics_process(delta: float) -> void:
-	print(current_state)
 	var horizontal_velocity := Vector3(velocity.x, 0, velocity.z)
 	var current_speed := horizontal_velocity.length()
 	var current_dir := horizontal_velocity.normalized()
 	speed = base_speed
 	friction = base_friction
 	if is_on_floor():
-		jumps = 2
+		jumps = max_jumps
 	else:
 		velocity += get_gravity() * delta
 		speed = speed/10
