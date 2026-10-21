@@ -6,10 +6,11 @@ extends CharacterBody3D
 @export var steer_speed:= 1
 var friction: float = base_friction
 var speed: float = base_speed
-var state:= "idle"
+var current_state:= "idle"
 var jumps:= 0
 
 func _physics_process(delta: float) -> void:
+	print(current_state)
 	var horizontal_velocity := Vector3(velocity.x, 0, velocity.z)
 	var current_speed := horizontal_velocity.length()
 	var current_dir := horizontal_velocity.normalized()
@@ -22,19 +23,19 @@ func _physics_process(delta: float) -> void:
 		speed = speed/10
 		friction /= 20
 	if Input.is_action_just_pressed("move_jump") and jumps:
-		if state == "slide" and is_on_floor():
+		if current_state == "slide" and is_on_floor():
 			velocity.y = jump_velocity*1.5
 		else:
 			velocity.y = jump_velocity
 		jumps -= 1
 	if Input.is_action_pressed("move_sprint") and Input.is_action_pressed("move_forward"):
-		state = "sprint"
+		current_state = "sprint"
 		if is_on_floor():
 			speed *= 2
 		else:
 			speed *= 1.5
-	elif state == "sprint":
-		state = "idle"
+	elif current_state == "sprint":
+		current_state = "idle"
 	if Input.is_action_pressed("move_crouch"):
 		if Input.is_action_just_pressed("move_crouch"):
 			velocity.y = -5 * jump_velocity
@@ -42,15 +43,15 @@ func _physics_process(delta: float) -> void:
 		scale.y = 0.5
 		scale.z = 0.5
 		if current_speed > base_speed/1.5:
-			state = "slide"
+			current_state = "slide"
 			speed = 0
 			friction /= 100
 		else:
-			state = "crouch"
+			current_state = "crouch"
 			speed /= 2
 	else:
-		if not state == "slide" or state == "crouch":
-			state="idle"
+		if current_state == "slide" or current_state == "crouch":
+			current_state="idle"
 		scale.x = 1
 		scale.y = 1
 		scale.z = 1
@@ -60,7 +61,7 @@ func _physics_process(delta: float) -> void:
 	velocity.z *= (100-friction)/100
 	velocity.x += direction.x * speed
 	velocity.z += direction.z * speed 
-	if state == "slide":
+	if current_state == "slide":
 		var new_dir := current_dir.lerp(direction, steer_speed * delta).normalized()
 		velocity.x = new_dir.x * current_speed
 		velocity.z = new_dir.z * current_speed
