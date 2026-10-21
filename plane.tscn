@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://x1blq4pdmsc8"]
 
+[ext_resource type="Script" uid="uid://cocu7domsfqbb" path="res://plane.gd" id="1_dpar4"]
+[ext_resource type="Texture2D" uid="uid://bvpjew8jfhj48" path="res://icon.svg" id="2_nqs3l"]
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s46f0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n65sj"]
@@ -18,6 +21,8 @@ material = SubResource("StandardMaterial3D_wd2d1")
 
 [node name="Plane" type="StaticBody3D" unique_id=1771454766]
 physics_material_override = SubResource("PhysicsMaterial_s46f0")
+script = ExtResource("1_dpar4")
+target_texture = ExtResource("2_nqs3l")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1476560278]
 shape = SubResource("BoxShape3D_n65sj")

@@ -6,3 +6,6 @@
 
 [node name="Plane" parent="." unique_id=1771454766 instance=ExtResource("1_6oouq")]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+
+[node name="Plane2" parent="." unique_id=1447649926 instance=ExtResource("1_6oouq")]
+transform = Transform3D(50, 0, 0, 0, 29.787958, -40.158157, 0, 40.158157, 29.787958, 0, 0, -49.598995)
