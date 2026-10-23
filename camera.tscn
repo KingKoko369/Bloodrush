@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://eoua23l64hwy"]
 
 [ext_resource type="Script" uid="uid://225q471hl5qw" path="res://camera.gd" id="1_u5kg4"]
+[ext_resource type="PackedScene" uid="uid://cm13dbrw02dsh" path="res://health.tscn" id="2_diie0"]
 
 [node name="Camera" type="Camera3D" unique_id=1777531537]
 current = true
 script = ExtResource("1_u5kg4")
+
+[node name="Health" parent="." unique_id=1729495892 instance=ExtResource("2_diie0")]
