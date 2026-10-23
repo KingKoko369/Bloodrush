@@ -1,31 +1,49 @@
+@tool # 1. Added tool keyword to run in editor
 extends StaticBody3D
 
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
-@export var target_texture: Texture2D:
+@onready var collider: CollisionShape3D = $CollisionShape3D
+
+@export var target_texture: Texture2D = preload("res://icon.svg"):
 	set(value):
 		target_texture = value
-		if is_inside_tree(): # Ensure the node is active before changing textures
-			_update_texture()
+		_update_texture()
 
-# Called when the node enters the scene tree for the first time.
+@export var size: Vector2 = Vector2(1,1):
+	set(value):
+		size = value
+		_update_texture()
+
+@export var tile: Vector2 = Vector2(1,1):
+	set(value):
+		tile = value
+		_update_texture()
+
 func _ready() -> void:
 	_update_texture()
-	var material = mesh_instance.get_active_material(0) as StandardMaterial3D
-	
-	if material:
-		# 2. Duplicate the material so individual scene instances don't share changes
-		var unique_material = material.duplicate()
-		
-		# 3. Apply your custom texture to the Albedo channel
-		unique_material.albedo_texture = target_texture
-		
-		# 4. Push the unique material back to the surface override slot
-		mesh_instance.set_surface_override_material(0, unique_material)
 
 func _update_texture() -> void:
-	if not target_texture:
+	if not is_inside_tree() or not mesh_instance or not collider:
 		return
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	
+	var material = mesh_instance.get_active_material(0) as StandardMaterial3D
+	if material:
+		var unique_material = material.duplicate()
+		unique_material.albedo_texture = target_texture
+		unique_material.uv1_scale.x = tile.x
+		unique_material.uv1_scale.y = tile.y
+		mesh_instance.set_surface_override_material(0, unique_material)
+	
+	if collider.shape:
+		var shape = collider.shape
+		var unique_shape = shape.duplicate()
+		if unique_shape.has_method("set_size"):
+			unique_shape.set("size", Vector3(size.x, 0, size.y))
+		collider.shape = unique_shape
+	
+	if mesh_instance.mesh:
+		var mesh = mesh_instance.mesh
+		var unique_mesh = mesh.duplicate()
+		if unique_mesh.has_method("set_size"):
+			unique_mesh.set("size", size)
+		mesh_instance.mesh = unique_mesh

@@ -1,11 +1,17 @@
 [gd_scene format=3 uid="uid://cc4kyvhc8f8uk"]
 
 [ext_resource type="PackedScene" uid="uid://x1blq4pdmsc8" path="res://plane.tscn" id="1_6oouq"]
+[ext_resource type="Texture2D" uid="uid://cc4ewfnxxutny" path="res://rock_wall_17_diff_4k.jpg" id="2_y84a2"]
 
 [node name="Demo Room" type="Node3D" unique_id=2013839125]
 
 [node name="Plane" parent="." unique_id=1771454766 instance=ExtResource("1_6oouq")]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+target_texture = ExtResource("2_y84a2")
+size = Vector2(2, 2)
+tile = Vector2(64, 64)
 
 [node name="Plane2" parent="." unique_id=1447649926 instance=ExtResource("1_6oouq")]
-transform = Transform3D(50, 0, 0, 0, 45.315388, -21.130913, 0, 21.130913, 45.315388, 0, 19.21463, -85.56729)
+transform = Transform3D(50, 0, 0, 0, 45.315388, -21.130913, 0, 21.130913, 45.315388, 0, 21, -85.567)
+size = Vector2(2, 2)
+tile = Vector2(1, 1)

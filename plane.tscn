@@ -1,31 +1,27 @@
 [gd_scene format=3 uid="uid://x1blq4pdmsc8"]
 
 [ext_resource type="Script" uid="uid://cocu7domsfqbb" path="res://plane.gd" id="1_dpar4"]
-[ext_resource type="Texture2D" uid="uid://bvpjew8jfhj48" path="res://icon.svg" id="2_nqs3l"]
+[ext_resource type="Texture2D" uid="uid://bvpjew8jfhj48" path="res://icon.svg" id="2_dpar4"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s46f0"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_n65sj"]
-size = Vector3(2, 0, 2)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r8t2q"]
-load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.s3tc.ctex"
+[sub_resource type="BoxShape3D" id="BoxShape3D_dpar4"]
+size = Vector3(1, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wd2d1"]
-albedo_texture = SubResource("CompressedTexture2D_r8t2q")
-uv1_scale = Vector3(16, 16, 16)
-uv1_triplanar = true
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_jbd7x"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_nqs3l"]
 material = SubResource("StandardMaterial3D_wd2d1")
+size = Vector2(1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xwvw"]
+albedo_texture = ExtResource("2_dpar4")
 
 [node name="Plane" type="StaticBody3D" unique_id=1771454766]
-physics_material_override = SubResource("PhysicsMaterial_s46f0")
 script = ExtResource("1_dpar4")
-target_texture = ExtResource("2_nqs3l")
+tile = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1476560278]
-shape = SubResource("BoxShape3D_n65sj")
+shape = SubResource("BoxShape3D_dpar4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1366118569]
-mesh = SubResource("PlaneMesh_jbd7x")
+mesh = SubResource("PlaneMesh_nqs3l")
+surface_material_override/0 = SubResource("StandardMaterial3D_6xwvw")
