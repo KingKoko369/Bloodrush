@@ -9,12 +9,14 @@ extends StaticBody3D
 		target_texture = value
 		_update_texture()
 
-@export var size: Vector2 = Vector2(1,1):
+@export_custom(PROPERTY_HINT_LINK, "")
+var size: Vector2 = Vector2(1,1):
 	set(value):
 		size = value
 		_update_texture()
 
-@export var tile: Vector2 = Vector2(1,1):
+@export_custom(PROPERTY_HINT_LINK, "")
+var tile: Vector2 = Vector2(1,1):
 	set(value):
 		tile = value
 		_update_texture()

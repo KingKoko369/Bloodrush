@@ -6,12 +6,11 @@
 [node name="Demo Room" type="Node3D" unique_id=2013839125]
 
 [node name="Plane" parent="." unique_id=1771454766 instance=ExtResource("1_6oouq")]
-transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 target_texture = ExtResource("2_y84a2")
-size = Vector2(2, 2)
+size = Vector2(100, 100)
 tile = Vector2(64, 64)
 
 [node name="Plane2" parent="." unique_id=1447649926 instance=ExtResource("1_6oouq")]
-transform = Transform3D(50, 0, 0, 0, 45.315388, -21.130913, 0, 21.130913, 45.315388, 0, 21, -85.567)
-size = Vector2(2, 2)
-tile = Vector2(1, 1)
+transform = Transform3D(1, 0, 0, 0, 0.90630776, -0.4226183, 0, 0.4226183, 0.90630776, 0, 21.135, -95)
+size = Vector2(100, 100)
+tile = Vector2(50, 50)
