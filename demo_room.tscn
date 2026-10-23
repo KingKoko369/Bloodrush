@@ -8,4 +8,4 @@
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 
 [node name="Plane2" parent="." unique_id=1447649926 instance=ExtResource("1_6oouq")]
-transform = Transform3D(50, 0, 0, 0, 45.315388, -21.130913, 0, 21.130913, 45.315388, 0, 0, -49.598995)
+transform = Transform3D(50, 0, 0, 0, 45.315388, -21.130913, 0, 21.130913, 45.315388, 0, 19.21463, -85.56729)

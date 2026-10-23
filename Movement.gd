@@ -1,10 +1,11 @@
 extends CharacterBody3D
 
-@export var base_speed:= 5
-@export var jump_velocity:= 5
-@export var base_friction:= 75
+@export var base_speed:= 5.0
+@export var jump_velocity:= 5.0
+@export_range(0,100,1,"suffix:%") var base_friction:= 75
 @export var steer_speed:= 1
 @export var max_jumps:=2
+@export var slope_influence:= 15.0
 var friction: float = base_friction
 var speed: float = base_speed
 var current_state:= "idle"
@@ -24,11 +25,12 @@ func _physics_process(delta: float) -> void:
 		friction /= 20
 	if Input.is_action_just_pressed("move_jump") and jumps:
 		if current_state == "slide" and is_on_floor():
-			velocity.y = jump_velocity*1.5
+			velocity.y += jump_velocity*(1+0.05*current_speed)
+			floor_snap_length = 0.1 
 		else:
-			velocity.y = jump_velocity
+			velocity.y += jump_velocity
 		jumps -= 1
-	if Input.is_action_pressed("move_sprint") and Input.is_action_pressed("move_forward"):
+	if Input.is_action_pressed("move_sprint") and Input.is_action_pressed("move_forward") and current_state != "crouch":
 		current_state = "sprint"
 		if is_on_floor():
 			speed *= 2
@@ -42,7 +44,7 @@ func _physics_process(delta: float) -> void:
 		scale.x = 0.5
 		scale.y = 0.5
 		scale.z = 0.5
-		if current_speed > base_speed/1.5:
+		if current_speed > base_speed/1.5 and current_state != "crouch":
 			current_state = "slide"
 			speed = 0
 			friction /= 100
@@ -63,6 +65,18 @@ func _physics_process(delta: float) -> void:
 	velocity.z += direction.z * speed 
 	if current_state == "slide":
 		var new_dir := current_dir.lerp(direction, steer_speed * delta).normalized()
+		if is_on_floor():
+			var floor_normal := get_floor_normal()
+			var slope_factor := new_dir.dot(floor_normal)
+			var real_slope := new_dir.dot(Vector3(floor_normal.x, 0, floor_normal.z))
+			current_speed += real_slope * slope_influence * delta
+			if not Input.is_action_just_pressed("move_jump"):
+				var flat_target_velocity = new_dir * current_speed
+				var sloped_velocity = flat_target_velocity.slide(floor_normal)
+				floor_snap_length = 0.5
+				velocity.x = sloped_velocity.x
+				velocity.y = sloped_velocity.y
+				velocity.z = sloped_velocity.z
 		velocity.x = new_dir.x * current_speed
 		velocity.z = new_dir.z * current_speed
 	move_and_slide()
