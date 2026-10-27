@@ -7,6 +7,7 @@ extends CanvasLayer
 @export_range(0,100,1,"suffix:%","prefer_slider") var overheal_decay:= 10
 @onready var label = $Label
 @onready var death = $Death
+@onready var player = get_parent().get_parent()
 var timer = 1
 
 func _ready() -> void:
@@ -18,7 +19,7 @@ func _process(delta: float) -> void:
 	if health <= 0:
 		death.show()
 		label.hide()
-		print(get_parent().get_parent())
+		player.set("dead",true)
 	label.set("text",str(health)+"/"+str(max_health))
 	
 	timer -= delta

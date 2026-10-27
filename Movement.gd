@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@export var dead:= false
 @export_group("Jump")
 @export var jump_velocity:= 5.0
 @export var max_jumps:=2
@@ -7,7 +8,7 @@ extends CharacterBody3D
 @export var base_speed:= 5.0
 @export_range(0,100,1,"suffix:%","prefer_slider") var base_friction:= 75
 @export_group("Slide")
-@export_range(0,100,1,"suffix:%","prefer_slider") var friction_mult = 1
+@export_range(0,100,1,"suffix:%","prefer_slider") var friction_mult:= 1
 @export var steer_speed:= 1
 @export var slope_influence:= 15.0
 var friction: float = base_friction
@@ -51,7 +52,6 @@ func _physics_process(delta: float) -> void:
 		if current_speed > base_speed/1.5 and current_state != "crouch":
 			current_state = "slide"
 			speed = 0
-			@warning_ignore("integer_division")
 			friction *= friction_mult/100
 		else:
 			current_state = "crouch"
@@ -62,8 +62,23 @@ func _physics_process(delta: float) -> void:
 		scale.x = 1
 		scale.y = 1
 		scale.z = 1
-	var input_dir:=Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	var direction:=(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction:= Vector3(0,0,0)
+	if dead:
+		current_state = "slide"
+		scale.x = 0.25
+		scale.y = 0.25
+		scale.z = 0.25
+		$Camera.paused = false
+		if current_speed > 0.1:
+			rotation.y = atan2(-current_dir.x, -current_dir.z)
+		if is_on_floor():
+			friction = 100
+			var normal := get_floor_normal()
+			var slope_angle := acos(normal.dot(Vector3.UP))
+			$Camera.rotation.x = -current_dir.dot(Vector3(normal.x, 0, normal.z).normalized()) * slope_angle
+	else:
+		var input_dir:=Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	velocity.x *= (100-friction)/100
 	velocity.z *= (100-friction)/100
 	velocity.x += direction.x * speed
