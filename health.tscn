@@ -1,18 +1,15 @@
 [gd_scene format=3 uid="uid://cm13dbrw02dsh"]
 
+[ext_resource type="Script" uid="uid://btkx0nt3kwxjh" path="res://health.gd" id="1_ledv5"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_wtiye"]
 font_size = 32
 
-[node name="Health" type="Control" unique_id=1729495892]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Health" type="CanvasLayer" unique_id=1291778390]
+script = ExtResource("1_ledv5")
+max_health = 10
 
 [node name="Label" type="Label" parent="." unique_id=1078569100]
-layout_mode = 0
 offset_left = 1.0
 offset_top = 588.0
 offset_right = 145.0
@@ -20,3 +17,12 @@ offset_bottom = 648.0
 text = "100/100"
 label_settings = SubResource("LabelSettings_wtiye")
 vertical_alignment = 2
+
+[node name="Death" type="ColorRect" parent="." unique_id=1430923946]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.39215687)

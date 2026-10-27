@@ -1,10 +1,14 @@
 extends CharacterBody3D
 
-@export var base_speed:= 5.0
+@export_group("Jump")
 @export var jump_velocity:= 5.0
-@export_range(0,100,1,"suffix:%") var base_friction:= 75
-@export var steer_speed:= 1
 @export var max_jumps:=2
+@export_group("Movement")
+@export var base_speed:= 5.0
+@export_range(0,100,1,"suffix:%","prefer_slider") var base_friction:= 75
+@export_group("Slide")
+@export_range(0,100,1,"suffix:%","prefer_slider") var friction_mult = 1
+@export var steer_speed:= 1
 @export var slope_influence:= 15.0
 var friction: float = base_friction
 var speed: float = base_speed
@@ -47,7 +51,8 @@ func _physics_process(delta: float) -> void:
 		if current_speed > base_speed/1.5 and current_state != "crouch":
 			current_state = "slide"
 			speed = 0
-			friction /= 100
+			@warning_ignore("integer_division")
+			friction *= friction_mult/100
 		else:
 			current_state = "crouch"
 			speed /= 2
@@ -67,7 +72,6 @@ func _physics_process(delta: float) -> void:
 		var new_dir := current_dir.lerp(direction, steer_speed * delta).normalized()
 		if is_on_floor():
 			var floor_normal := get_floor_normal()
-			var slope_factor := new_dir.dot(floor_normal)
 			var real_slope := new_dir.dot(Vector3(floor_normal.x, 0, floor_normal.z))
 			current_speed += real_slope * slope_influence * delta
 			if not Input.is_action_just_pressed("move_jump"):
