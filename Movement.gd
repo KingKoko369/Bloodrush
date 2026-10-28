@@ -17,6 +17,8 @@ var current_state:= "idle"
 var jumps:= 0
 var safe:= []
 var checkpoint:= false
+var respawn:=[Vector3(0,0,0),Vector3(0,0,0),0,0]
+@onready var health:=$Camera/Health
 
 func _physics_process(delta: float) -> void:
 	var horizontal_velocity := Vector3(velocity.x, 0, velocity.z)
@@ -24,6 +26,13 @@ func _physics_process(delta: float) -> void:
 	var current_dir := horizontal_velocity.normalized()
 	speed = base_speed
 	friction = base_friction
+	if checkpoint:
+		health.health = max(health.health,0)
+		respawn = []
+		respawn.append(position)
+		respawn.append(velocity)
+		respawn.append(health.health)
+		respawn.append(jumps)
 	if is_on_floor():
 		jumps = max_jumps
 		safe.append([position,Vector2($Camera.rotation.x,rotation.y)])
@@ -38,7 +47,7 @@ func _physics_process(delta: float) -> void:
 		rotation.y = safe[0][1].y
 		$Camera.rotation.x = safe[0][1].x
 		velocity = Vector3(0,0,0)
-		$Camera/Health.health *= 0.9
+		health.health *= 0.9
 	if Input.is_action_just_pressed("move_jump") and jumps and not dead:
 		if current_state == "slide" and is_on_floor():
 			velocity.y += jump_velocity*(1+0.05*current_speed)
@@ -75,6 +84,11 @@ func _physics_process(delta: float) -> void:
 		scale.z = 1
 	var direction:= Vector3(0,0,0)
 	if dead:
+		if Input.is_action_just_pressed("respawn"):
+			position = respawn[0]
+			velocity = respawn[1]
+			health.health = respawn[2]
+			jumps = respawn[3]
 		current_state = "slide"
 		scale.x = 0.25
 		scale.y = 0.25
