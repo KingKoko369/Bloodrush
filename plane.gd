@@ -1,4 +1,4 @@
-@tool # 1. Added tool keyword to run in editor
+@tool
 extends StaticBody3D
 
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D

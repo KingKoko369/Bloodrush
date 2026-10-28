@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://5h4o752t1njh"]
 
-[ext_resource type="PackedScene" uid="uid://dpx4vr4aj5ou7" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cc4kyvhc8f8uk" path="res://demo_room.tscn" id="2_0xm2m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
@@ -21,16 +20,5 @@ glow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=929552284]
 environment = SubResource("Environment_h2yge")
-
-[node name="Player" parent="." unique_id=921330805 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-dead = null
-jump_velocity = null
-max_jumps = null
-base_speed = null
-base_friction = null
-friction_mult = null
-steer_speed = null
-slope_influence = null
 
 [node name="Demo Room" parent="." unique_id=2013839125 instance=ExtResource("2_0xm2m")]

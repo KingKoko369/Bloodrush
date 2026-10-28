@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://x1blq4pdmsc8" path="res://plane.tscn" id="1_6oouq"]
 [ext_resource type="Texture2D" uid="uid://cc4ewfnxxutny" path="res://rock_wall_17_diff_4k.jpg" id="2_y84a2"]
+[ext_resource type="PackedScene" uid="uid://dpx4vr4aj5ou7" path="res://player.tscn" id="3_7w2pl"]
+[ext_resource type="PackedScene" uid="uid://33tqqck8et8v" path="res://checkpoint.tscn" id="4_d40t1"]
 
 [node name="Demo Room" type="Node3D" unique_id=2013839125]
 
@@ -14,3 +16,9 @@ tile = Vector2(64, 64)
 transform = Transform3D(1, 0, 0, 0, 0.90630776, -0.4226183, 0, 0.4226183, 0.90630776, 0, 21.135, -95)
 size = Vector2(100, 100)
 tile = Vector2(50, 50)
+
+[node name="Player" parent="." unique_id=921330805 instance=ExtResource("3_7w2pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Checkpoint" parent="." unique_id=302520643 instance=ExtResource("4_d40t1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 25)

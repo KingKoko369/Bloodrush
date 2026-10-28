@@ -1,20 +1,22 @@
 extends CharacterBody3D
 
-@export var dead:= false
 @export_group("Jump")
 @export var jump_velocity:= 5.0
 @export var max_jumps:=2
 @export_group("Movement")
 @export var base_speed:= 5.0
-@export_range(0,100,1,"suffix:%","prefer_slider") var base_friction:= 75
+@export_range(0,100,1,"suffix:%","prefer_slider") var base_friction:= 75.0
 @export_group("Slide")
 @export_range(0,100,1,"suffix:%","prefer_slider") var friction_mult:= 1
 @export var steer_speed:= 1
 @export var slope_influence:= 15.0
-var friction: float = base_friction
-var speed: float = base_speed
+var friction: float = 0.0
+var speed: float = 0.0
+var dead:= false
 var current_state:= "idle"
 var jumps:= 0
+var safe:= []
+var checkpoint:= false
 
 func _physics_process(delta: float) -> void:
 	var horizontal_velocity := Vector3(velocity.x, 0, velocity.z)
@@ -24,11 +26,20 @@ func _physics_process(delta: float) -> void:
 	friction = base_friction
 	if is_on_floor():
 		jumps = max_jumps
+		safe.append([position,Vector2($Camera.rotation.x,rotation.y)])
+		if len(safe) > 50:
+			safe.pop_front()
 	else:
 		velocity += get_gravity() * delta
 		speed = speed/10
 		friction /= 20
-	if Input.is_action_just_pressed("move_jump") and jumps:
+	if position.y < -5:
+		position = safe[0][0]
+		rotation.y = safe[0][1].y
+		$Camera.rotation.x = safe[0][1].x
+		velocity = Vector3(0,0,0)
+		$Camera/Health.health *= 0.9
+	if Input.is_action_just_pressed("move_jump") and jumps and not dead:
 		if current_state == "slide" and is_on_floor():
 			velocity.y += jump_velocity*(1+0.05*current_speed)
 			floor_snap_length = 0.1 
@@ -52,7 +63,7 @@ func _physics_process(delta: float) -> void:
 		if current_speed > base_speed/1.5 and current_state != "crouch":
 			current_state = "slide"
 			speed = 0
-			friction *= friction_mult/100
+			friction *= friction_mult/100.0
 		else:
 			current_state = "crouch"
 			speed /= 2
@@ -72,10 +83,11 @@ func _physics_process(delta: float) -> void:
 		if current_speed > 0.1:
 			rotation.y = atan2(-current_dir.x, -current_dir.z)
 		if is_on_floor():
-			friction = 100
 			var normal := get_floor_normal()
 			var slope_angle := acos(normal.dot(Vector3.UP))
 			$Camera.rotation.x = -current_dir.dot(Vector3(normal.x, 0, normal.z).normalized()) * slope_angle
+			velocity.x *= 0.5
+			velocity.z *= 0.5
 	else:
 		var input_dir:=Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
