@@ -1,42 +1,45 @@
 [gd_scene format=3 uid="uid://33tqqck8et8v"]
 
-[ext_resource type="Script" uid="uid://s0n4sdesu8bs" path="res://checkpoint_detector.gd" id="1_luqgl"]
+[ext_resource type="Script" uid="uid://s0n4sdesu8bs" path="res://checkpoint_zone.gd" id="1_luqgl"]
+[ext_resource type="Script" uid="uid://bcwrnr7604y86" path="res://checkpoint.gd" id="1_r6hke"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_bt0x1"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_r6hke"]
 size = Vector3(1, 2, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_wusw0"]
+[sub_resource type="BoxMesh" id="BoxMesh_tnhlw"]
 size = Vector3(1, 2, 1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_r6hke"]
-radius = 10.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_s20m7"]
+radius = 5.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6hke"]
 transparency = 1
 cull_mode = 2
 albedo_color = Color(1, 1, 0, 0.47058824)
 
-[sub_resource type="SphereMesh" id="SphereMesh_bt0x1"]
+[sub_resource type="SphereMesh" id="SphereMesh_q25r3"]
 material = SubResource("StandardMaterial3D_r6hke")
-radius = 10.0
-height = 20.0
+radius = 5.0
+height = 10.0
 
-[node name="Checkpoint" type="StaticBody3D" unique_id=302520643 groups=["checkpoint"]]
+[node name="Checkpoint" type="StaticBody3D" unique_id=302520643]
+script = ExtResource("1_r6hke")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=80747157 groups=["checkpoint"]]
-shape = SubResource("BoxShape3D_bt0x1")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=80747157]
+shape = SubResource("BoxShape3D_r6hke")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1158599180 groups=["checkpoint"]]
-mesh = SubResource("BoxMesh_wusw0")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1158599180]
+mesh = SubResource("BoxMesh_tnhlw")
 
-[node name="Checkpoint Detector" type="Area3D" parent="." unique_id=1503256146]
+[node name="Checkpoint Zone" type="Area3D" parent="." unique_id=1503256146]
 script = ExtResource("1_luqgl")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoint Detector" unique_id=807524185]
-shape = SubResource("SphereShape3D_r6hke")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoint Zone" unique_id=807524185]
+shape = SubResource("SphereShape3D_s20m7")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoint Detector" unique_id=1468313492]
-mesh = SubResource("SphereMesh_bt0x1")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoint Zone" unique_id=1468313492]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.010088444, 0.007994652, 0.0005347729)
+mesh = SubResource("SphereMesh_q25r3")
 
-[connection signal="body_entered" from="Checkpoint Detector" to="Checkpoint Detector" method="_on_body_entered"]
-[connection signal="body_exited" from="Checkpoint Detector" to="Checkpoint Detector" method="_on_body_exited"]
+[connection signal="body_entered" from="Checkpoint Zone" to="Checkpoint Zone" method="_on_body_entered"]
+[connection signal="body_exited" from="Checkpoint Zone" to="Checkpoint Zone" method="_on_body_exited"]

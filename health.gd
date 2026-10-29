@@ -9,21 +9,28 @@ extends CanvasLayer
 @onready var death: ColorRect = $Death
 @onready var player: CharacterBody3D = get_parent().get_parent()
 var timer = 1
+var wasshown := false
 
 func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
+	if get_parent().current:
+		show()
+	else:
+		hide()
 	var checkpoint: bool = player.checkpoint
 	if health > max_health and not checkpoint:
 		health -= ceil((health-max_health)*(overheal_decay/100.0))
 	if health <= 0:
+		get_parent().current = false
 		death.show()
 		label.hide()
 		player.set("dead",true)
-		Engine.time_scale += 0.1
 		Engine.time_scale = max(Engine.time_scale,1)
 	else:
+		death.hide()
+		label.show()
 		label.set("text",str(int(health*10)/10.0)+"/"+str(int(max_health)))
 		#label.set("text",str(health)+"/"+str(max_health))
 		if not checkpoint:

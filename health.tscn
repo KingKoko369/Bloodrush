@@ -7,7 +7,6 @@ font_size = 32
 
 [node name="Health" type="CanvasLayer" unique_id=1291778390]
 script = ExtResource("1_ledv5")
-health = 10.0
 
 [node name="Label" type="Label" parent="." unique_id=1078569100]
 offset_left = 1.0
