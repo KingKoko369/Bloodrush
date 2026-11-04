@@ -4,7 +4,7 @@ extends StaticBody3D
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @onready var collider: CollisionShape3D = $CollisionShape3D
 
-@export var target_texture: Texture2D = preload("res://icon.svg"):
+@export var target_texture: Texture2D = preload("C:/Users/andrewconn/Documents/GitHub/Bloodrush/Textures/icon.svg"):
 	set(value):
 		target_texture = value
 		_update_texture()

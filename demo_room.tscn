@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cc4kyvhc8f8uk"]
 
 [ext_resource type="PackedScene" uid="uid://x1blq4pdmsc8" path="res://plane.tscn" id="1_6oouq"]
-[ext_resource type="Texture2D" uid="uid://cc4ewfnxxutny" path="res://rock_wall_17_diff_4k.jpg" id="2_y84a2"]
+[ext_resource type="Texture2D" uid="uid://cc4ewfnxxutny" path="res://Textures/rock_wall_17_diff_4k.jpg" id="2_y84a2"]
 [ext_resource type="PackedScene" uid="uid://dpx4vr4aj5ou7" path="res://player.tscn" id="3_7w2pl"]
 [ext_resource type="PackedScene" uid="uid://33tqqck8et8v" path="res://checkpoint.tscn" id="4_d40t1"]
 [ext_resource type="PackedScene" uid="uid://bvggjl361pn4f" path="res://blood.tscn" id="5_d40t1"]

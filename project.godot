@@ -14,7 +14,7 @@ config/name="Bloodrush"
 config/tags=PackedStringArray("3d", "game")
 run/main_scene="uid://5h4o752t1njh"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Textures/icon.svg"
 
 [display]
 

@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://bvggjl361pn4f"]
 
+[ext_resource type="Texture2D" uid="uid://7w65tqqkhh7e" path="res://Textures/BloodFabricSpatter03.png" id="1_6b75d"]
 [ext_resource type="Script" uid="uid://cfc8mjgtiv18h" path="res://decal.gd" id="2_6b75d"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ujq61"]
+radius = 0.25
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bt0x1"]
 transparency = 1
@@ -10,8 +12,8 @@ albedo_color = Color(0.5882353, 0.078431375, 0, 0.98039216)
 
 [sub_resource type="SphereMesh" id="SphereMesh_wusw0"]
 material = SubResource("StandardMaterial3D_bt0x1")
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wusw0"]
+radius = 0.125
+height = 0.25
 
 [node name="Blood" type="RigidBody3D" unique_id=2023389132]
 
@@ -23,6 +25,7 @@ layers = 4
 mesh = SubResource("SphereMesh_wusw0")
 
 [node name="Decal" type="Decal" parent="." unique_id=1354549169]
-texture_albedo = SubResource("PlaceholderTexture2D_wusw0")
-cull_mask = 1048571
+layers = 16
+texture_albedo = ExtResource("1_6b75d")
+cull_mask = 1047568
 script = ExtResource("2_6b75d")
