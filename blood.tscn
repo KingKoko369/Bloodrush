@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bvggjl361pn4f"]
+
+[ext_resource type="Script" uid="uid://cfc8mjgtiv18h" path="res://decal.gd" id="2_6b75d"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ujq61"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bt0x1"]
+transparency = 1
+albedo_color = Color(0.5882353, 0.078431375, 0, 0.98039216)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wusw0"]
+material = SubResource("StandardMaterial3D_bt0x1")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wusw0"]
+
+[node name="Blood" type="RigidBody3D" unique_id=2023389132]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=454234805]
+shape = SubResource("SphereShape3D_ujq61")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=892750929]
+layers = 4
+mesh = SubResource("SphereMesh_wusw0")
+
+[node name="Decal" type="Decal" parent="." unique_id=1354549169]
+texture_albedo = SubResource("PlaceholderTexture2D_wusw0")
+cull_mask = 1048571
+script = ExtResource("2_6b75d")
