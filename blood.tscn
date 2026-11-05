@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://bvggjl361pn4f"]
 
 [ext_resource type="Texture2D" uid="uid://7w65tqqkhh7e" path="res://Textures/BloodFabricSpatter03.png" id="1_6b75d"]
+[ext_resource type="Script" uid="uid://k8f6gshskrnt" path="res://blood.gd" id="1_nad23"]
 [ext_resource type="Script" uid="uid://cfc8mjgtiv18h" path="res://decal.gd" id="2_6b75d"]
+[ext_resource type="Script" uid="uid://7yeu0gmsupex" path="res://blood_zone.gd" id="4_b6oel"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ujq61"]
 radius = 0.25
@@ -15,7 +17,10 @@ material = SubResource("StandardMaterial3D_bt0x1")
 radius = 0.125
 height = 0.25
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_wusw0"]
+
 [node name="Blood" type="RigidBody3D" unique_id=2023389132]
+script = ExtResource("1_nad23")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=454234805]
 shape = SubResource("SphereShape3D_ujq61")
@@ -29,3 +34,11 @@ layers = 16
 texture_albedo = ExtResource("1_6b75d")
 cull_mask = 1047568
 script = ExtResource("2_6b75d")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=819235012]
+script = ExtResource("4_b6oel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=772589859]
+shape = SubResource("SphereShape3D_wusw0")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
