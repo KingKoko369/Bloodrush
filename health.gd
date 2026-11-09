@@ -23,7 +23,6 @@ func _process(delta: float) -> void:
 	if health > max_health and not checkpoint:
 		health -= ceil((health-max_health)*(overheal_decay/100.0))
 	if health <= 0:
-		get_parent().current = false
 		death.show()
 		label.hide()
 		player.set("dead",true)
