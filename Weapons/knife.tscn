@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://u46oenmq8hhd"]
+
+[ext_resource type="PackedScene" uid="uid://k2ygre00lkdb" path="res://Weapons/Styloo Weapon Pack/ASSETS.fbx_coolknife.fbx" id="1_vymjn"]
+
+[node name="Knife" unique_id=1458774473 instance=ExtResource("1_vymjn")]
+
+[node name="knife2" parent="." index="0" unique_id=209916519]
+transform = Transform3D(23.605614, 0, 0, 0, -4.9889815e-07, 31.26266, 0, -4.1850605, -3.7267996e-06, 0, 0, 0)
