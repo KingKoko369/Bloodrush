@@ -12,10 +12,13 @@ font_size = 32
 script = ExtResource("1_ledv5")
 
 [node name="Label" type="Label" parent="." unique_id=1078569100]
-offset_left = -263.0
-offset_top = 581.0
-offset_right = -132.0
-offset_bottom = 626.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 88.0
+offset_top = -45.0
+offset_right = 219.0
+grow_vertical = 0
 text = "100/100"
 label_settings = SubResource("LabelSettings_wtiye")
 horizontal_alignment = 1
@@ -31,10 +34,13 @@ grow_vertical = 2
 color = Color(1, 0, 0, 0.39215687)
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=66469282]
-anchors_preset = -1
-offset_top = 490.0
-offset_right = -1063.0
-value = 100.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -159.0
+offset_right = 89.0
+grow_vertical = 0
+value = 75.0
 fill_mode = 3
 texture_under = ExtResource("2_m5lkp")
 texture_over = ExtResource("3_p77em")
