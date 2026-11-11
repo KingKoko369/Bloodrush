@@ -5,6 +5,70 @@
 [ext_resource type="PackedScene" uid="uid://dpx4vr4aj5ou7" path="res://player.tscn" id="3_7w2pl"]
 [ext_resource type="PackedScene" uid="uid://33tqqck8et8v" path="res://checkpoint.tscn" id="4_d40t1"]
 [ext_resource type="PackedScene" uid="uid://bvggjl361pn4f" path="res://blood.tscn" id="5_d40t1"]
+[ext_resource type="PackedScene" uid="uid://cw6b3ekhptb1c" path="res://spawner.tscn" id="6_wb3hs"]
+[ext_resource type="Script" uid="uid://k8f6gshskrnt" path="res://blood.gd" id="7_u8vil"]
+[ext_resource type="Texture2D" uid="uid://7w65tqqkhh7e" path="res://Textures/BloodFabricSpatter03.png" id="8_f7h44"]
+[ext_resource type="Script" uid="uid://cfc8mjgtiv18h" path="res://decal.gd" id="9_dv17o"]
+[ext_resource type="Script" uid="uid://7yeu0gmsupex" path="res://blood_zone.gd" id="10_3k43w"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ujq61"]
+radius = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bt0x1"]
+transparency = 1
+albedo_color = Color(0.5882353, 0.078431375, 0, 0.98039216)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wusw0"]
+material = SubResource("StandardMaterial3D_bt0x1")
+radius = 0.125
+height = 0.25
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wusw0"]
+
+[sub_resource type="PackedScene" id="PackedScene_8opka"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(1073741830, 1073741829, 23, 22, 2, 0, 0),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("Blood", "RigidBody3D", "script", "CollisionShape3D", "CollisionShape3D", "shape", "MeshInstance3D", "MeshInstance3D", "layers", "mesh", "Decal", "Decal", "layers", "texture_albedo", "cull_mask", "script", "Area3D", "Area3D", "script", "CollisionShape3D", "CollisionShape3D", "shape", "_on_body_entered", "body_entered"),
+"node_count": 6,
+"node_ids": PackedInt32Array(2023389132, 454234805, 892750929, 1354549169, 819235012, 772589859),
+"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("./Area3D"), NodePath("Area3D"), NodePath("Area3D")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 1, 2, 0, 0, 1073741824, 0, 4, 3, -1, 1, 5, 1, 0, 1073741825, 0, 7, 6, -1, 2, 8, 2, 9, 3, 0, 1073741826, 0, 11, 10, -1, 4, 12, 4, 13, 5, 14, 6, 15, 7, 0, 1073741827, 0, 17, 16, -1, 1, 18, 8, 0, 1073741828, 0, 20, 19, -1, 1, 21, 9, 0),
+"variants": [ExtResource("7_u8vil"), SubResource("SphereShape3D_ujq61"), 4, SubResource("SphereMesh_wusw0"), 16, ExtResource("8_f7h44"), 1047568, ExtResource("9_dv17o"), ExtResource("10_3k43w"), SubResource("SphereShape3D_wusw0")],
+"version": 3
+}
+
+[sub_resource type="PackedScene" id="PackedScene_ot23u"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(1073741830, 1073741829, 23, 22, 2, 0, 0),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("Blood", "RigidBody3D", "script", "CollisionShape3D", "CollisionShape3D", "shape", "MeshInstance3D", "MeshInstance3D", "layers", "mesh", "Decal", "Decal", "layers", "texture_albedo", "cull_mask", "script", "Area3D", "Area3D", "script", "CollisionShape3D", "CollisionShape3D", "shape", "_on_body_entered", "body_entered"),
+"node_count": 6,
+"node_ids": PackedInt32Array(2023389132, 454234805, 892750929, 1354549169, 819235012, 772589859),
+"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("./Area3D"), NodePath("Area3D"), NodePath("Area3D")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 1, 2, 0, 0, 1073741824, 0, 4, 3, -1, 1, 5, 1, 0, 1073741825, 0, 7, 6, -1, 2, 8, 2, 9, 3, 0, 1073741826, 0, 11, 10, -1, 4, 12, 4, 13, 5, 14, 6, 15, 7, 0, 1073741827, 0, 17, 16, -1, 1, 18, 8, 0, 1073741828, 0, 20, 19, -1, 1, 21, 9, 0),
+"variants": [ExtResource("7_u8vil"), SubResource("SphereShape3D_ujq61"), 4, SubResource("SphereMesh_wusw0"), 16, ExtResource("8_f7h44"), 1047568, ExtResource("9_dv17o"), ExtResource("10_3k43w"), SubResource("SphereShape3D_wusw0")],
+"version": 3
+}
+
+[sub_resource type="PackedScene" id="PackedScene_cbauw"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(1073741830, 1073741829, 23, 22, 2, 0, 0),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("Blood", "RigidBody3D", "script", "CollisionShape3D", "CollisionShape3D", "shape", "MeshInstance3D", "MeshInstance3D", "layers", "mesh", "Decal", "Decal", "layers", "texture_albedo", "cull_mask", "script", "Area3D", "Area3D", "script", "CollisionShape3D", "CollisionShape3D", "shape", "_on_body_entered", "body_entered"),
+"node_count": 6,
+"node_ids": PackedInt32Array(2023389132, 454234805, 892750929, 1354549169, 819235012, 772589859),
+"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("./Area3D"), NodePath("Area3D"), NodePath("Area3D")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 1, 2, 0, 0, 1073741824, 0, 4, 3, -1, 1, 5, 1, 0, 1073741825, 0, 7, 6, -1, 2, 8, 2, 9, 3, 0, 1073741826, 0, 11, 10, -1, 4, 12, 4, 13, 5, 14, 6, 15, 7, 0, 1073741827, 0, 17, 16, -1, 1, 18, 8, 0, 1073741828, 0, 20, 19, -1, 1, 21, 9, 0),
+"variants": [ExtResource("7_u8vil"), SubResource("SphereShape3D_ujq61"), 4, SubResource("SphereMesh_wusw0"), 16, ExtResource("8_f7h44"), 1047568, ExtResource("9_dv17o"), ExtResource("10_3k43w"), SubResource("SphereShape3D_wusw0")],
+"version": 3
+}
 
 [node name="Demo Room" type="Node3D" unique_id=2013839125]
 
@@ -26,3 +90,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 25)
 
 [node name="Blood" parent="." unique_id=2145920258 instance=ExtResource("5_d40t1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.611387, -6.4434266)
+
+[node name="Spawner" parent="." unique_id=663224697 instance=ExtResource("6_wb3hs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.552536, 0.72697115, 0)
+radius = 5
+enemies = Array[PackedScene]([SubResource("PackedScene_8opka"), SubResource("PackedScene_ot23u"), SubResource("PackedScene_cbauw")])
+
+[node name="Spawner" parent="Spawner" unique_id=1834884278 instance=ExtResource("6_wb3hs")]
+enemies = Array[PackedScene]([ExtResource("4_d40t1")])
