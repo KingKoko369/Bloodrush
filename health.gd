@@ -6,6 +6,7 @@ extends CanvasLayer
 @export_group("Overheal")
 @export_range(0,100,1,"suffix:%","prefer_slider") var overheal_decay:= 10
 @onready var label: Label = $Label
+@onready var bar: TextureProgressBar = $TextureProgressBar
 @onready var death: ColorRect = $Death
 @onready var player: CharacterBody3D = get_parent().get_parent()
 var timer = 1
@@ -31,7 +32,7 @@ func _process(delta: float) -> void:
 		death.hide()
 		label.show()
 		label.set("text",str(int(health*10)/10.0)+"/"+str(int(max_health)))
-		#label.set("text",str(health)+"/"+str(max_health))
+		bar.set("value",health)
 		if not checkpoint:
 			health -= delta
 		Engine.time_scale = min(0.5+(health/max_health*2),1)
